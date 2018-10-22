@@ -3,7 +3,7 @@ require 'gosu'
 class GolWindow < Gosu::Window
 
     WIDTH = 800
-    ROWS = COLUMNS = 60
+    ROWS = COLUMNS = 80
     RES = WIDTH/ROWS
 
     def initialize
@@ -74,7 +74,6 @@ class GolWindow < Gosu::Window
 
     def update
         next_grid()
-        sleep 0.025
     end
 end
 
