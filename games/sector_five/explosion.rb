@@ -6,7 +6,7 @@ class Explosion
         @x = death_x
         @y = death_y
         @radius = 30
-        @images = Gosu::Images.load_tiles('sprites/explosions.png', 60, 60)
+        @images = Gosu::Image.load_tiles('sprites/explosions.png', 60, 60)
         @image_index = 0
         @finished = false
     end

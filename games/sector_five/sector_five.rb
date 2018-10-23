@@ -15,6 +15,7 @@ class SectorFive < Gosu::Window
         @player = Player.new(self)
         @enemies = []
         @bullets = []
+        @explosions = []
     end
 
     def draw
@@ -24,6 +25,9 @@ class SectorFive < Gosu::Window
         end
         for bullet in @bullets
             bullet.draw
+        end
+        for explosion in @explosions
+            explosion.draw
         end
     end
 
@@ -47,6 +51,7 @@ class SectorFive < Gosu::Window
                 if distance < enemy.radius + bullet.radius
                     @enemies.delete enemy
                     @bullets.delete bullet
+                    @explosions << Explosion.new(self, enemy.x, enemy.y)
                 end
             end 
         end
