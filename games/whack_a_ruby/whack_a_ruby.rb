@@ -13,6 +13,7 @@ class WhackARuby < Gosu::Window
         @x_velocity = 5
         @y_velocity = 5
         @visible = 0
+        @hit = 0
     end
 
     def draw
@@ -20,6 +21,25 @@ class WhackARuby < Gosu::Window
             @image.draw(@x - @width/2, @y - @height/2, 1)
         end
         @hammer_img.draw(mouse_x - 40, mouse_y - 10, 1)
+        if @hit == 0
+            c = Gosu::Color::NONE
+        elsif @hit == 1
+            c = Gosu::Color::GREEN
+        elsif @hit == -1
+            c = Gosu::Color::RED
+        end
+        draw_quad(0,0,c,800,0,c,800,600,c,0,600,c)
+        @hit = 0
+    end
+
+    def button_down(id)
+        if id == Gosu::MsLeft
+            if Gosu.distance(mouse_x, mouse_y, @x, @y) < 50 && @visible >= 0
+                @hit = 1
+            else
+                @hit = -1
+            end
+        end
     end
 
     def update
