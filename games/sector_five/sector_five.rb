@@ -1,4 +1,5 @@
 require 'gosu'
+require_relative 'player'
 
 class SectorFive < Gosu::Window
     
