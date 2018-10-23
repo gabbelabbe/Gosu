@@ -33,6 +33,7 @@ class WhackARuby < Gosu::Window
         draw_quad(0,0,c,800,0,c,800,600,c,0,600,c)
         @hit = 0
         @font.draw_text(@score.to_s,700,20,2)
+        @font.draw_text(@time_left.to_s,20,20,2)
     end
 
     def button_down(id)
@@ -54,6 +55,7 @@ class WhackARuby < Gosu::Window
         @y_velocity *= -1 if @y + @height/2 > 600 || @y - @height/2 < 0
         @visible -= 1
         @visible = 30 if @visible < -10 && rand < 0.01
+        @time_left = (100 - (Gosu.milliseconds / 1000))
     end
 end
 
