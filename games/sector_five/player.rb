@@ -1,5 +1,7 @@
 class Player
     ROTATION_SPEED = 5
+    ACCELERATION = 2
+    FRICTION = 0.9
 
     def initialize(window)
         @x = 200
@@ -25,12 +27,12 @@ class Player
     def move
         @x += @x_velocity
         @y += @y_velocity
-        @x_velocity *= 0.9
-        @y_velocity *= 0.9
+        @x_velocity *= FRICTION
+        @y_velocity *= FRICTION
     end
 
     def accelerate
-        @x_velocity += Gosu.offset_x(@angle, 2)
-        @y_velocity += Gosu.offset_y(@angle, 2)
+        @x_velocity += Gosu.offset_x(@angle, ACCELERATION)
+        @y_velocity += Gosu.offset_y(@angle, ACCELERATION)
     end
 end
