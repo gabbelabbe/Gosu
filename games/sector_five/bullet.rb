@@ -1,5 +1,6 @@
 class Bullet
     SPEED = 5
+    attr_reader :x, :y, :radius
 
     def initialize(window, player_x, player_y, player_angle)
         @window = window
