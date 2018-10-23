@@ -16,6 +16,8 @@ class WhackARuby < Gosu::Window
         @hit = 0
         @font = Gosu::Font.new(30)
         @score = 0
+        @playing = true
+        @start_time = 0
     end
 
     def draw
@@ -34,28 +36,45 @@ class WhackARuby < Gosu::Window
         @hit = 0
         @font.draw_text(@score.to_s,700,20,2)
         @font.draw_text(@time_left.to_s,20,20,2)
+        unless @playing
+            @font.draw_text('Game Over', 300, 300, 3)
+            @font.draw_text('Press the Space Bar to Play Again', 175, 350, 3)
+            @visible = 20
+        end
     end
 
     def button_down(id)
-        if id == Gosu::MsLeft
-            if Gosu.distance(mouse_x, mouse_y, @x, @y) < 50 && @visible >= 0
-                @hit = 1
-                @score += 5
-            else
-                @hit = -1
-                @score -= 1
+        if @playing
+            if id == Gosu::MsLeft
+                if Gosu.distance(mouse_x, mouse_y, @x, @y) < 50 && @visible >= 0
+                    @hit = 1
+                    @score += 5
+                else
+                    @hit = -1
+                    @score -= 1
+                end
+            end
+        else
+            if id == Gosu::KbSpace
+                @playing = true
+                @visible = -10
+                @start_time = Gosu.milliseconds
+                @score = 0
             end
         end
     end
 
     def update
-        @x += @x_velocity
-        @y += @y_velocity
-        @x_velocity *= -1 if @x + @width/2 > 800 || @x - @width/2 < 0
-        @y_velocity *= -1 if @y + @height/2 > 600 || @y - @height/2 < 0
-        @visible -= 1
-        @visible = 30 if @visible < -10 && rand < 0.01
-        @time_left = (100 - (Gosu.milliseconds / 1000))
+        if @playing
+            @x += @x_velocity
+            @y += @y_velocity
+            @time_left = (100 - ((Gosu.milliseconds - @start_time) / 1000))
+            @playing = false if @time_left < 0
+            @x_velocity *= -1 if @x + @width/2 > 800 || @x - @width/2 < 0
+            @y_velocity *= -1 if @y + @height/2 > 600 || @y - @height/2 < 0
+            @visible -= 1
+            @visible = 30 if @visible < -10 && rand < 0.01
+        end
     end
 end
 
