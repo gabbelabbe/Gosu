@@ -10,12 +10,17 @@ class SectorFive < Gosu::Window
         super(WIDTH, HEIGHT)
         self.caption = 'Sector Five'
         @player = Player.new(self)
-        @enemy = Enemy.new(self)
+        @enemies = []
+        10.times do |i|
+            @enemies << Enemy.new(self)
+        end
     end
 
     def draw
         @player.draw
-        @enemy.draw
+        for enemy in @enemies
+            enemy.draw
+        end
     end
 
     def update
@@ -23,7 +28,9 @@ class SectorFive < Gosu::Window
         @player.turn_right if button_down?(Gosu::KbRight)
         @player.accelerate if button_down?(Gosu::KbUp)
         @player.move
-        @enemy.move
+        for enemy in @enemies
+            enemy.move
+        end
     end
 end
 
