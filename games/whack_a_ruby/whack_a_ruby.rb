@@ -5,6 +5,7 @@ class WhackARuby < Gosu::Window
         super 800,600
         self.caption = "Whack the Ruby!"
         @image = Gosu::Image.new('img/ruby.png')
+        @hammer_img = Gosu::Image.new('img/hammer.png')
         @x = 200
         @y = 200
         @width = 50
@@ -18,6 +19,7 @@ class WhackARuby < Gosu::Window
         if @visible > 0
             @image.draw(@x - @width/2, @y - @height/2, 1)
         end
+        @hammer_img.draw(mouse_x - 40, mouse_y - 10, 1)
     end
 
     def update
