@@ -2,8 +2,8 @@ require 'gosu'
 
 class GolWindow < Gosu::Window
 
-    WIDTH = 800
-    ROWS = COLUMNS = 80
+    WIDTH = 1000
+    ROWS = COLUMNS = 100
     RES = WIDTH/ROWS
 
     def initialize
