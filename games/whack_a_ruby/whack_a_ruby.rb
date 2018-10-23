@@ -20,6 +20,8 @@ class WhackARuby < Gosu::Window
     def update
         @x += @x_velocity
         @y += @y_velocity
+        @x_velocity *= -1 if @x + @width/2 > 800 || @x - @width/2 < 0
+        @y_velocity *= -1 if @y + @height/2 > 600 || @y - @height/2 < 0
     end
 end
 
