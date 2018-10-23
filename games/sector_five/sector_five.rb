@@ -2,6 +2,7 @@ require 'gosu'
 require_relative 'player'
 require_relative 'enemy'
 require_relative 'bullet'
+require_relative 'explosion'
 
 class SectorFive < Gosu::Window
     WIDTH = 800
