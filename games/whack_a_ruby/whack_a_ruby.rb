@@ -9,10 +9,17 @@ class WhackARuby < Gosu::Window
         @y = 200
         @width = 50
         @height = 43
+        @x_velocity = 5
+        @y_velocity = 5
     end
 
     def draw
         @image.draw(@x - @width/2, @y - @height/2, 1)
+    end
+
+    def update
+        @x += @x_velocity
+        @y += @y_velocity
     end
 end
 
