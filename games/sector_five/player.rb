@@ -1,4 +1,6 @@
 class Player
+    ROTATION_SPEED = 5
+
     def initialize(window)
         @x = 200
         @y = 200
@@ -13,11 +15,11 @@ class Player
     end
 
     def turn_right
-        @angle += 5
+        @angle += ROTATION_SPEED
     end
 
     def turn_left
-        @angle -= 5
+        @angle -= ROTATION_SPEED
     end
 
     def move
