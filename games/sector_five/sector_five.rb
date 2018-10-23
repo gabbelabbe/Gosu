@@ -55,6 +55,17 @@ class SectorFive < Gosu::Window
                 end
             end 
         end
+        for explosion in @explosions
+            @explosions.delete explosion if explosion.finished
+        end
+        for enemy in @enemies
+            if enemy.y > HEIGHT + enemy.radius
+                @enemies.delete enemy
+            end
+        end
+        for bullet in @bullets
+            @bullets.delete bullet unless bullet.onscreen?
+        end
     end
 
     def button_down(id)
