@@ -1,4 +1,5 @@
 class Explosion
+    attr_reader :finished
 
     def initialize(window, death_x, death_y)
         @window = window
