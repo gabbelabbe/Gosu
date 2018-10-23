@@ -40,6 +40,15 @@ class SectorFive < Gosu::Window
         for bullet in @bullets
             bullet.move
         end
+        for enemy in @enemies
+            for bullet in @bullets
+                distance = Gosu.distance(enemy.x, enemy.y, bullet.x, bullet.y)
+                if distance < enemy.radius + bullet.radius
+                    @enemies.delete enemy
+                    @bullets.delete bullet
+                end
+            end 
+        end
     end
 
     def button_down(id)
