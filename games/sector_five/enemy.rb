@@ -1,11 +1,4 @@
 class Enemy
-<<<<<<< HEAD
-    def initialize(window)
-        @x = rand(window + 1)
-        @y = 0
-        @image = 
-    end
-=======
     SPEED = 4
     attr_reader :x, :y, :radius
 
@@ -24,5 +17,4 @@ class Enemy
         @image.draw(@x - @radius, @y - @radius, 1)
     end
 
->>>>>>> fcd34d6cdef2cddf96afe449ea48a1c1523554aa
 end

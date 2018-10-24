@@ -1,11 +1,8 @@
 require 'gosu'
 require_relative 'player'
 require_relative 'enemy'
-<<<<<<< HEAD
-=======
 require_relative 'bullet'
 require_relative 'explosion'
->>>>>>> fcd34d6cdef2cddf96afe449ea48a1c1523554aa
 
 class SectorFive < Gosu::Window
     WIDTH = 800
@@ -16,20 +13,13 @@ class SectorFive < Gosu::Window
         super(WIDTH, HEIGHT)
         self.caption = 'Sector Five'
         @player = Player.new(self)
-<<<<<<< HEAD
-        @enemy = Enemy.new(self)
-=======
         @enemies = []
         @bullets = []
         @explosions = []
->>>>>>> fcd34d6cdef2cddf96afe449ea48a1c1523554aa
     end
 
     def draw
         @player.draw
-<<<<<<< HEAD
-        @p
-=======
         for enemy in @enemies
             enemy.draw
         end
@@ -39,7 +29,6 @@ class SectorFive < Gosu::Window
         for explosion in @explosions
             explosion.draw
         end
->>>>>>> fcd34d6cdef2cddf96afe449ea48a1c1523554aa
     end
 
     def update
