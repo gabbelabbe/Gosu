@@ -19,11 +19,11 @@ class SectorFive < Gosu::Window
     def draw
         case @scene
         when :start
-            draw_start
+            draw_start()
         when :game
-            draw_game
+            draw_game()
         when :end
-            draw_end
+            draw_end()
         end
     end
 
@@ -42,6 +42,38 @@ class SectorFive < Gosu::Window
         for explosion in @explosions
             explosion.draw
         end
+    end
+
+    def update
+        case @scene
+        when :game
+            update_game()
+        when :end
+            update_end()
+        end
+    end
+
+    def button_down(id)
+        case @scene
+        when :start
+            button_down_start(id)
+        when :game
+            button_down_game(id)
+        when :end
+            button_down_end(id)
+        end
+    end
+
+    def button_down_start
+        initialize_game()
+    end
+
+    def initialize_game
+        @player = Player.new(self)
+        @enemies = []
+        @bullets = []
+        @explosions = []
+        @scene = :game
     end
 end
 
