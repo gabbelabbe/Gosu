@@ -13,7 +13,18 @@ class SectorFive < Gosu::Window
         super WIDTH, HEIGHT
         self.caption = "Sector Five"
         @background_image = Gosu::Image.new('sprites/start_screen.png')
-        @scenes = :start    
+        @scene = :start    
+    end
+
+    def draw
+        case @scene
+        when :start
+            draw_start
+        when :game
+            draw_game
+        when :end
+            draw_end
+        end
     end
 end
 
