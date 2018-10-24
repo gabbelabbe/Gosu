@@ -26,6 +26,23 @@ class SectorFive < Gosu::Window
             draw_end
         end
     end
+
+    def draw_start
+        @background_image.draw(0,0,0)
+    end
+
+    def draw_game
+        @player.draw
+        for enemy in @enemies
+            enemy.draw
+        end
+        for bullet in @bullets
+            bullet.draw
+        end
+        for explosion in @explosions
+            explosion.draw
+        end
+    end
 end
 
 window = SectorFive.new
