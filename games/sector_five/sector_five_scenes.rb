@@ -3,6 +3,7 @@ require_relative 'player'
 require_relative 'enemy'
 require_relative 'bullet'
 require_relative 'explosion'
+require_relative 'credits'
 
 class SectorFive < Gosu::Window
     WIDTH = 800
