@@ -130,6 +130,55 @@ class SectorFive < Gosu::Window
             @bullets << Bullet.new(self, @player.x, @player.y, @player.angle)
         end
     end
+
+    def initialize_end(fate)
+        case fate
+        when :count_reached
+            @message = "You made it! You destroyed #{@enemies_destroyed} ships"
+            @message2 = "and #{MAX_ENEMIES - @enemies_destroyed} reached the base."
+        when :hit_by_enemy
+            @message = "You were struck by an enemy ship."
+            @message2 = "Before your ship was destroyed, "
+            @message2 += "you took out #{@enemies_destroyed} enemy ships."
+        when :off_top
+            @message = "You got too close to the enemy mother ship."
+            @message2 = "Before your ship was destroyed, "
+            @message2 += "you took out #{@enemies_destroyed} enemy ships."
+        end
+        @bottom_message = "Press P to play again, or Q to quit."
+        @message_font = Gosu::Font.new(28)
+        @credits = []
+        y = 700
+        File.open('credits.txt').each do |line|
+            @credits << Credit.new(self, line.chomp, 100, y)
+            y += 30  
+        end
+        @scene = :end
+    end
+
+    def draw_end
+        clip_to(50, 140, 700, 360) do
+            @credits.each do |credit|
+                credit.draw
+            end
+        end
+        draw_line(0, 140, Gosu::Color::RED, WIDTH, 140, Gosu::Color::RED)
+        @message_font.draw_text(@message, 40, 40, 1, 1, 1, Gosu::Color::FUCHSIA)
+        @message_font.draw_text(@message2, 40, 75, 1, 1, 1, Gosu::Color::FUCHSIA)
+        draw_line(0, 500, Gosu::Color::RED, WIDTH, 500, Gosu::Color::RED)
+        @message_font.draw_text(@bottom_message, 180, 540, 1, 1, 1, Gosu::Color::AQUA)
+    end
+
+    def update_end
+        for credit in @credits
+            credit.move
+        end
+        if @credits.last.y < 150
+            for credit in @credits
+                credit.reset
+            end 
+        end
+    end
 end
 
 window = SectorFive.new
