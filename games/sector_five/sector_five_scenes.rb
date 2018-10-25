@@ -116,6 +116,12 @@ class SectorFive < Gosu::Window
         for bullet in @bullets
             @bullets.delete bullet unless bullet.onscreen?
         end
+        initialize_end(:count_reached) if @enemies_appeared > MAX_ENEMIES
+        for enemy in @enemies
+            distance = Gosu.distance(enemy.x, enemy.y, @player.x, @player.y)
+            initialize_end(:hit_by_enemy) if distance < @player.radius + enemy.radius
+        end
+        initialize_end(:off_top) if @player.y < -@player.radius
     end
 
     def button_down_game(id)
