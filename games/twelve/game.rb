@@ -24,6 +24,13 @@ class Game
         for square in @squares
             square.draw
         end
+        if game_over?
+            c = Gosu::Color.argb(0x33000000)
+            @window.draw_quad(0, 0, c, 640, 0, c, 640, 640, c, 0, 640, c, 4)
+            @font.draw_text("Game Over!", 230, 240, 5)
+            @font.draw_text("CTRL-R to Play Again", 225, 320, 5, 0.6, 0.6)
+            return
+        end
         return unless @start_square
         @start_square.highlight(:start)
         return unless @current_square && @current_square != @start_square
@@ -123,6 +130,23 @@ class Game
         squares.reject! {|square| square.number == 0}
         return false if squares.count != 2
         return false if squares[0].color != squares[1].color
+        return true
+    end
+
+    def legal_move_for?(start_square)
+        return false if start_square.number == 0
+        for end_square in @squares
+            if move_is_legal?(start_square, end_square)
+                return true
+            end
+        end
+        return false
+    end
+
+    def game_over?
+        for square in @squares
+            return false if legal_move_for?(square)
+        end
         return true
     end
 end
