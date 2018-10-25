@@ -179,6 +179,14 @@ class SectorFive < Gosu::Window
             end 
         end
     end
+
+    def button_down_end(id)
+        if id == Gosu::KbP
+            initialize_game
+        elsif id == Gosu::KbQ
+            close
+        end
+    end
 end
 
 window = SectorFive.new
