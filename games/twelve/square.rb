@@ -16,4 +16,22 @@ class Square
         @color = color
         @number = 1
     end
+
+    def draw
+        if number != 0
+            x1 = 22 + @column * 100
+            y2 = 22 + @row * 100
+            x2 = x1 + 96
+            y2 = y1
+            x3 = x2
+            y3 = y2 + 96
+            x4 = x1
+            y4 = y3
+            c = @@colors[@color]
+            @@window.draw_quad(x1, y1, c, x2, y2, c, x3, y3, c, x4, y4, c)
+            x_center = x1 + 48
+            x_text = x_center - @@font.text_width(@number.to_s) / 2
+            @@font.draw_text(@number.to_s, x_text, y_text, 1)
+        end
+    end
 end
