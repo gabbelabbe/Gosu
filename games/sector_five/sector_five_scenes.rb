@@ -8,6 +8,7 @@ class SectorFive < Gosu::Window
     WIDTH = 800
     HEIGHT = 600
     ENEMY_FREQUENCY = 0.05
+    MAX_ENEMIES = 100
 
     def initialize
         super WIDTH, HEIGHT
@@ -74,6 +75,8 @@ class SectorFive < Gosu::Window
         @bullets = []
         @explosions = []
         @scene = :game
+        @enemies_appeared = 0
+        @enemies_destroyed = 0
     end
 
     def update_game
@@ -83,6 +86,7 @@ class SectorFive < Gosu::Window
         @player.move
         if rand < ENEMY_FREQUENCY
             @enemies << Enemy.new(self)
+            @enemies_appeared += 1
         end
         for enemy in @enemies
             enemy.move
@@ -97,6 +101,7 @@ class SectorFive < Gosu::Window
                     @enemies.delete enemy
                     @bullets.delete bullet
                     @explosions << Explosion.new(self, enemy.x, enemy.y)
+                    @enemies_destroyed += 1
                 end
             end 
         end
