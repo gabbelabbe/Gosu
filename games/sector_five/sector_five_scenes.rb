@@ -15,7 +15,9 @@ class SectorFive < Gosu::Window
         super WIDTH, HEIGHT
         self.caption = "Sector Five"
         @background_image = Gosu::Image.new('sprites/start_screen.png')
-        @scene = :start    
+        @scene = :start
+        @start_music = Gosu::Song.new('sounds/Lost Frontier.ogg')
+        @start_music.play(true)
     end
 
     def draw
@@ -78,6 +80,8 @@ class SectorFive < Gosu::Window
         @scene = :game
         @enemies_appeared = 0
         @enemies_destroyed = 0
+        @game_music = Gosu::Song.new('sounds/Cephalopod.ogg')
+        @game_music.play(true)
     end
 
     def update_game
@@ -154,6 +158,8 @@ class SectorFive < Gosu::Window
             y += 30  
         end
         @scene = :end
+        @end_music = Gosu::Song.new('sounds/FromHere.ogg')
+        @end_music.play(true)
     end
 
     def draw_end
