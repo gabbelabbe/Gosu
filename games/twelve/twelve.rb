@@ -11,6 +11,16 @@ class Twelve < Gosu::Window
     def draw
         @game.draw
     end
+
+    def needs_mouse?
+        true
+    end
+
+    def button_down(id)
+        if id == Gosu::MsLeft
+            @game.handle_mouse_down(mouse_x, mouse_y)
+        end
+    end
 end
 
 window = Twelve.new
