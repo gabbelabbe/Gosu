@@ -35,4 +35,13 @@ class Square
             @@font.draw_text(@number.to_s, x_text, y_text, 1)
         end
     end
+
+    def clear
+        @number = 0
+    end
+
+    def set(color, number)
+        @color = color
+        @number = number
+    end
 end

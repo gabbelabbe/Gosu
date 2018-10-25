@@ -57,7 +57,7 @@ class Game
         else
             column_start, column_end = square2.column, square1.column
         end
-        (column_start .. column_end) do |column|
+        (column_start .. column_end).each do |column|
             the_squares << get_square(column, square1.row)
         end
         return the_squares
@@ -66,11 +66,11 @@ class Game
     def square_between_in_column(square1, square2)
         the_squares = []
         if square1.row < square2.row
-            column_start, row_end = square1.row, square2.row  
+            row_start, row_end = square1.row, square2.row  
         else
             row_start, row_end = square2.row, square1.row
         end
-        (column_start .. column_end) do |row|
+        (row_start .. row_end).each do |row|
             the_squares << get_square(square1.column, row)
         end
         return the_squares
@@ -89,5 +89,11 @@ class Game
         return if squares.count != 2
         return if squares[0].color != squares[1].color
         #valid move if nothing is triggered
+
+        color = squares[0].color
+        number = squares[0].number + squares[1].number
+        squares[0].clear
+        squares[1].clear
+        square2.set(color, number)
     end
 end
