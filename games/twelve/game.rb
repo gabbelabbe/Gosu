@@ -36,7 +36,21 @@ class Game
         if column < 0 || column > 5 || row < 0 || row > 5
             return nil
         else
-            return @square[row * 6 + column]
+            return @squares[row * 6 + column]
         end
+    end
+
+    def handle_mouse_up(x, y)
+        row = (y.to_i - 20) / 100
+        column = (x.to_i - 20) / 100
+        @end_square = get_square(column, row)
+        if @start_square and @end_square
+            move(@start_square, @end_square)
+        end
+        @start_square = nil
+    end
+
+    def square_between_in_row(square1, square2)
+        
     end
 end
