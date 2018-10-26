@@ -92,19 +92,11 @@ class Game
     end
 
     def move(square1, square2)
-        return if square1.number == 0
-        if square1.row == square2.row
-            squares = square_between_in_row(square1, square2)
-        elsif square1.column == square2.column
-            squares = square_between_in_column(square1, square2)
-        else
-            return
-        end
-        squares.reject! {|square| square.number == 0}
-        return if squares.count != 2
-        return if squares[0].color != squares[1].color
+        valid = move_is_legal?(square1, square2)
+        return unless valid
         #valid move if nothing is triggered
 
+        squares = valid[1]
         color = squares[0].color
         number = squares[0].number + squares[1].number
         squares[0].clear
@@ -130,7 +122,7 @@ class Game
         squares.reject! {|square| square.number == 0}
         return false if squares.count != 2
         return false if squares[0].color != squares[1].color
-        return true
+        return true, squares
     end
 
     def legal_move_for?(start_square)
