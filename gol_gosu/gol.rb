@@ -66,7 +66,7 @@ class GolWindow < Gosu::Window
     def draw
         COLUMNS.times do |i|
             ROWS.times do |j|
-                color = Gosu::Color.rgb(@grid[i][j] * 255, @grid[i][j] * 255, @grid[i][j] * 255)
+                color = Gosu::Color.rgb(@grid[i][j], @grid[i][j] * 255, @grid[i][j] * 255)
                 Gosu.draw_rect(i*RES,j*RES,RES,RES,color)
             end
         end
