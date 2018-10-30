@@ -72,6 +72,12 @@ class GolWindow < Gosu::Window
         end
     end
 
+    def button_down(id)
+        if id == Gosu::KbR
+            @grid = create_grid
+        end
+    end
+
     def update
         next_grid()
     end
